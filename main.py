@@ -203,10 +203,13 @@ app = Flask(__name__)
 app.secret_key = 'hloIHKGuı867GHKugp8T7ug' 
 
 
-app.config["MYSQL_HOST"] = "localhost"
-app.config["MYSQL_USER"] = "halim"
-app.config["MYSQL_PASSWORD"] = "123456"
-app.config["MYSQL_DB"] = "users"
+# YENİ KOD: Ortam değişkenlerini kullanır
+# os modülünü import ettiğinizden emin olun (kodunuzda zaten var).
+
+app.config["MYSQL_HOST"] = os.environ.get("MYSQL_HOST")
+app.config["MYSQL_USER"] = os.environ.get("MYSQL_USER")
+app.config["MYSQL_PASSWORD"] = os.environ.get("MYSQL_PASSWORD")
+app.config["MYSQL_DB"] = os.environ.get("MYSQL_DB")
 app.config["MYSQL_CURSORCLASS"] = "DictCursor"
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
