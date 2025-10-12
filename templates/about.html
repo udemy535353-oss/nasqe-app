@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+{% block title %}
+Hakkımızda
+{% endblock %}
+{% block gui %}
+<h1>About Us</h1>
+<hr>
+<br><br><br>
+<div class = "jumbotron">
+    <h1 class = "strong">Biz arda ve muhammet</h1>
+    <p1 class = "strong">daha fazlası için küresel çapta hikayelere bakın</p1>
+    <br><br>
+    <a class = "btn btn-primary btn-lg" href = "/register" role = "button">Register</a>
+</div>
+<style>
+    .btn{ 
+        font-weight: inherit;
+        background: linear-gradient(90deg,#078efb 0,#ac87eb 66.7%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    body {
+        background-color: black;
+    }
+    .btn:hover {
+        font-weight: inherit;
+        background: linear-gradient(90deg,rgb(46, 161, 196) 0,rgb(137, 51, 177) 66.7%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+
+    }
+    .strong {
+        text-align: center;
+        color: white; 
+         font-weight:bold;
+        
+        font-family: "inter";
+    }
+    .jumbotron {
+        background-color:black;
+        border: 3px solid white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        margin: auto;
+
+    }
+</style>
+{% endblock %}

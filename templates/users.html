@@ -1,0 +1,107 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Küresel bloglar
+{% endblock %}
+
+{% block gui %}
+<br><br><br><br><br><br>
+<h2 class="noth">Sonuçlar</h2>
+<hr>
+
+{% if articles %}
+<form action="/searchuser" method="post">
+    <div class="input-group mb-3">
+        <input type="search" class="form-control form-control-lg" name="keyword" placeholder="Search topics or keywords" aria-label="Arama Kutusu">
+        <div class="input-group-append">
+            <button class="btn btn-lg btn-success" type="submit">Search</button>
+        </div>
+    </div>
+</form>
+
+    {% for article in articles %}
+        <div class="li">
+            <img 
+                src="{{ url_for('static', filename=article.profile) }}" 
+                alt="Profile Image" 
+                class="profile-img"
+            >
+            
+            <h1 class="username"><a href="profile/{{article.ıd}}">{{ article.username }}</a></h1>
+        </div>
+        <br>
+    {% endfor %}
+    
+    {% else %}
+    <div class="alert alert-danger">Makale bulunamadı</div>
+    {% endif %}
+
+    <style>
+    /* GENEL STİLLER */
+    .noth {
+        font-family: "inter";
+        font-weight: bold;
+        font-size: 64px;
+        color: white;
+        margin: 0;
+        padding: 0;
+    }
+    .text-decoration-none {
+        border-radius: 44px;
+    }
+    a {
+        text-decoration: none;
+        color: rgb(255, 255, 255);
+        transition: color 0.5s ease;
+    }
+    a:hover {
+        color: rgb(201, 194, 194);
+        text-decoration: none;
+    }
+    
+    /* LİSTE ÖĞELERİ (li) STİLİ */
+    .li {
+        display: flex; /* Flexbox'ı etkinleştirir */
+        align-items: center; /* İçerikleri dikeyde hizalar */
+        gap: 20px; /* Resim ve metin arasına boşluk bırakır */
+
+        border-radius: 44px;
+        background-image: url("{{ url_for('static', filename='black1.jpeg') }}"); 
+        background-size: cover; 
+        background-repeat: no-repeat; 
+        background-position: center; 
+        background-attachment: fixed;
+        width: 100%;
+        min-height: 70px; 
+        padding: 10px;
+        box-sizing: border-box;
+
+    }
+
+    /* PROFİL RESMİ STİLİ */
+    .profile-img {
+        width: 50px; 
+        height: 50px;
+        border-radius: 50%; /* Yuvarlak resim için */
+        object-fit: cover; /* Resmin kutuya sığmasını sağlar */
+        transition: transform 0.3s ease;
+    }
+    .profile-img:hover {
+        transform: scale(1.1); /* Hover anında resmi büyütür */
+    }
+    
+    /* KULLANICI ADI STİLİ */
+    .username {
+        margin: 0; /* Başlıkların varsayılan marginlerini sıfırlar */
+        padding: 0;
+    }
+    body {
+        background-color: black;
+
+    }
+
+    .container {
+        background-color: black;
+    }
+    </style>
+{% endblock %}

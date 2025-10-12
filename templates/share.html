@@ -1,0 +1,101 @@
+{% extends "layout.html" %}
+{% block title %}
+Yeni Gönderi Oluştur
+{% endblock %}
+{% block gui %}
+
+<style>
+    /* Form kontrol elemanlarının kenarlıklarını kalınlaştır */
+    .form-control {
+        border: 3px solid #ced4da; /* Varsayılan kenarlık rengi, 3px kalınlık */
+        padding: 0.75rem 1rem; /* Daha geniş iç boşluk */
+        border-radius: 0.5rem; /* Daha yuvarlak köşeler */
+        box-sizing: border-box; /* Padding'in genişliğe dahil olmasını sağlar */
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; /* Daha modern font */
+        margin-bottom: 1.5rem; /* Alt boşluk */
+        font-size: 1.1rem; /* Daha okunaklı font boyutu */
+    }
+    .form-control:focus {
+        border-color: #007bff; /* Odaklandığında mavi kenarlık */
+        box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25); /* Odaklandığında hafif gölge */
+    }
+
+    /* Başlık stili */
+    h2 {
+        color: #343a40; /* Koyu gri renk */
+        margin-bottom: 1.5rem; /* Alt boşluk */
+        font-weight: 600; /* Kalın font */
+    }
+
+    /* Yatay çizgi stili */
+    hr {
+        border-top: 2px solid #e9ecef; /* Daha belirgin çizgi */
+        margin-bottom: 2rem; /* Alt boşluk */
+    }
+
+    /* Buton stili */
+    .btn-custom {
+        background-color: #28a745; /* Canlı yeşil renk */
+        color: white; /* Beyaz yazı */
+        font-weight: bold; /* Kalın yazı */
+        border: none; /* Kenarlık yok */
+        border-radius: 0.5rem; /* Yuvarlak köşeler */
+        padding: 0.75rem 1.5rem; /* Daha geniş buton */
+        font-size: 1.1rem; /* Daha büyük font */
+        transition: background-color 0.3s ease; /* Hover efekti için yumuşak geçiş */
+    }
+    .btn-custom:hover {
+        background-color: #218838; /* Hover'da daha koyu yeşil */
+        color: white; /* Hover'da da beyaz yazı */
+    }
+    .btn-custom:focus {
+        box-shadow: 0 0 0 0.25rem rgba(40, 167, 69, 0.25); /* Odaklandığında gölge */
+    }
+
+    /* Ana container için ekstra stil (isteğe bağlı) */
+    .form-container {
+        background-color: #ffffff;
+        padding: 2.5rem;
+        border-radius: 0.75rem;
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+        max-width: 700px; /* Formun maksimum genişliği */
+        margin: 2rem auto; /* Ortalamak için */
+    }
+</style>
+
+<div class="form-container">
+    <h2>Yeni Gönderi Oluştur</h2>
+    <hr>
+
+    {% from "includes/formhelpers.html" import render_field %}
+    <form method="post">
+        <div class="mb-4">
+            {{ render_field(form.content, class="form-control", rows="10", placeholder="Gönderi içeriğini buraya yazın...") }}
+        </div>
+        <button type="submit" class="btn btn-custom">Paylaş</button>
+    </form>
+</div>
+
+<script>
+    // CKEditor'ün yüklendiğinden emin olun
+    // Bu kısım, CKEditor'ü Flask uygulamanızda zaten ayarladığınızı varsayar.
+    // Eğer CKEditor'ü kullanmıyorsanız bu script bloğunu kaldırabilirsiniz.
+    if (typeof CKEDITOR !== 'undefined' && CKEDITOR.instances.content) {
+        // Form gönderildiğinde CKEditor içeriğinin boş olup olmadığını kontrol etme
+        const form = document.querySelector('.form-container form');
+        const editor = CKEDITOR.instances.content;
+
+        form.addEventListener('submit', function(event) {
+            // CKEditor'dan içeriği al ve boşlukları temizle
+            const content = editor.getData().trim();
+
+            if (content === '') {
+                event.preventDefault(); // Form gönderimini engelle
+                alert('Lütfen gönderi içeriğini boş bırakmayın!'); // Basit bir uyarı
+                editor.focus(); // CKEditor'e odaklan
+            }
+        });
+    }
+</script>
+
+{% endblock %}

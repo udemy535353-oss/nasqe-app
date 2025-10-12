@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+
+{% block title %}
+
+search
+{% endblock %}
+
+{% block gui %}
+<br>
+<br>
+<br>
+{% if articles %}
+<form action="/searchuser" method="post">
+    <div class="input-group mb-3">
+        <input type="search" class="form-control form-control-lg" name="keyword" placeholder="Search topics or keywords" aria-label="Arama Kutusu">
+        <div class="input-group-append">
+            <button class="btn btn-lg btn-success" type="submit">Search</button>
+        </div>
+    </div>
+</form>
+{% for article in articles %}
+<div class ="rego">
+    <a href="/profile/{{user.id}}">{{user.username}}</a>
+</div>
+
+
+{% endfor %}
+<style>
+    .rego {
+        width:100%;
+
+    }
+</style>
+
+{% else%}
+<div class="alert-danger">uygun sonuç yok</div>
+{% endif %}
+<style>
+    .rego {
+        width:100%;
+
+    }
+    body {
+        background-color: black;
+    }
+    .container {
+        background-color: black;
+    }
+</style>
+{% endblock %}

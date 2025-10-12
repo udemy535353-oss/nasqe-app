@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+{% block title %}
+Güncelle
+{% endblock %}
+{% block gui %}
+<style>
+    /* form-control sınıfına sahip tüm input ve textarea öğelerinin kenarlıklarını kalınlaştır */
+    .form-control {
+        border: 3px solid #ced4da; /* Varsayılan kenarlık rengi, 2px kalınlık */
+        padding: 0.375rem 0.75rem; /* Kenarlık kalınlaştığında iç boşluğu koru */
+        border-radius: 0.25rem; /* Köşe yuvarlaklığını koru */
+        box-sizing: border-box;
+    }
+    .form-control:focus {
+        border-color: #000000;
+    }
+    .body {
+        color: #000000;
+    }    
+</style>
+
+
+<h2>Güncelle</h2>
+<hr>
+
+{% from "includes/formhelpers.html" import render_field %}
+<form method=post>
+  <dl>
+    {{ render_field(form.title,class = "form-control") }}
+    {{ render_field(form.content, class = "form-control") }}
+    
+  </dl>
+  <button type = "submit" class = "btn btn-primary">Güncelle</button>
+</form>
+{% endblock %}

@@ -1,0 +1,139 @@
+{% extends "layout.html" %}
+
+{% block gui %}
+<br>
+<br>
+<br>
+<br>
+<div class = "main">
+    
+    <div class="border">
+        <h5>Merhaba lütfen dosya seç kısmından bir dosya seçin ve yükle butonuna basarak seçtiğiniz resmi kaydedin.</h5>
+    </div>
+    <div class = "tyo">
+        <form action="/upload" method="post" enctype="multipart/form-data" class = "sep">
+            <input type="file" name="image" class="puyo" accept="image/*" required>
+            <input type="text" name="explain" class="puyo" accept="image/*">
+            <button type="submit" class="entropy">Yükle</button>
+        <br>
+        </form>
+    </div>
+    
+</div>
+    
+    
+<div class= "main2">
+   
+</div>
+<style>
+    .main {
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        text-align:center;
+    }
+    @media(max-width:1080px ) {
+        .border{
+            margin-top:650px !important;
+        }
+        .main2 {
+            margin-top:800px;
+        }
+    }
+    @media(max-width:700px ) {
+        .border{
+            margin-top:650px !important;
+            width:100%
+        }
+        .main2 {
+            margin-top:500px;
+        }
+    }
+    .border {
+        width:15%;
+        height:230px;
+        background-color: aqua;
+        margin-top:20%;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+        position:absolute;
+        margin: 0  auto;
+        width: 250px;
+        padding: 2em;
+        margin-top: 40%;
+        
+        
+        border-radius: 15px;
+        background:white;
+        
+        
+    }
+    body {
+        display: flex !important; /* Flexbox'ı etkinleştir */
+        justify-content: center !important; /* Yatayda ortala */
+        align-items: center !important;
+    }
+    .border::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        /* conic-gradient sözdizimi düzeltildi */
+        background-image: conic-gradient(from 90deg, #ff0000, #ffff00, #00ff00, #0000ff, #800080, #ff0000);
+
+        /* Daha doğru bir kenarlık efekti için boyutlandırma */
+        width: calc(100% + 10px); /* padding'in iki katı kadar genişlik */
+        height: calc(100% + 10px); /* padding'in iki katı kadar yükseklik */
+    
+        transform: translate(-50%, -50%); /* Eski tarayıcılar için daha uyumlu */
+        z-index: -1;
+        border-radius: 18px; /* Dış kenarlığın da köşelerini yuvarla */
+        filter:blur(10px); /* Kenarlık efekti için bulanıklık */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+    }
+    .tyo {
+        justify-content: space-evenly;
+        
+    }
+    .puyo {
+        margin: 6px;
+        color: black;
+        
+    }
+    .sep {
+        margin-top:30%;
+    }
+    .entropy {
+        background-color:rgba(28, 113, 224, 0.842);
+        width:25%;
+        border: 2px solid white;
+        border-radius:44px;
+        font-family: "arial";
+        transition : transform 0.4s ease;
+
+    }
+    .entropy:hover {
+        background-color: rgb(29, 81, 179);
+        transform : scale(1.1);
+        
+    }
+    body {
+        background-color: black;
+    }
+    h5 {
+        font-family: "arial";
+        font-weight:bold;
+        
+    }   
+    
+
+    
+</style>
+</body>
+</html>
+
+{% endblock %}

@@ -1,0 +1,24 @@
+.btn-fire {
+    font-family: Google Sans, sans-serif !important;
+
+
+            background-image: linear-gradient(to right,#ffc400,#dd2c00);
+
+            /* A vibrant gradient from purple to pink */
+            
+            
+            /* Make the text color transparent */
+            -webkit-text-fill-color: transparent;
+            
+            /* Clip the background to the text */
+            -webkit-background-clip: text;
+            background-clip: text;
+            
+            /* Ensure it's an inline element to flow with text */
+            display: inline-block;
+            letter-spacing: -0.04em;
+            
+            /* Modern tarayıcılar için aynı özelliği color ile de ekliyoruz */
+            color: transparent;
+            text-align:center;
+}

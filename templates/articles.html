@@ -1,0 +1,209 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Küresel bloglar
+{% endblock %}
+
+{% block gui %}
+<br><br><br>
+<br>
+<h2 class="brand">Nasqe</h2> <h2 class = "ayır">|</h2> <p class="alt">Blogs</p>
+<hr>
+
+
+{% if articles %}
+<form action="/search" method="post">
+  <input type="text" placeholder="Bir makale ara" class="main" name="keyword">
+  <button type="submit" class="voic">Search</button>
+</form>
+<br>
+<br>
+<ul class="mainl">
+    {% for article in articles %}
+    <div class="epochs">
+        <li class="list">
+            <a href="/article/{{ article.id }}" class="text-decoration-none fw-bold">
+                {{ article.title }}
+            </a>
+            
+            <small class="text-muted">
+                Yazar: {{ article.author }}
+            </small>
+        </li>
+    </div>
+    <br>
+    {% endfor %}
+    </ul>
+
+    {% else %}
+    <div class = "alert alert-danger">Makale bulunamadı</div>
+    {% endif %}
+    <style>
+    .list-group-item  {
+
+        font-weight: bold;
+        color:darkgoldenrod;
+
+
+
+
+
+
+    }
+    .list-group-item {
+        justify-content: center;
+        align-items: center;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        text-align:center;
+        background: linear-gradient(90deg, #d7e6ff 6.02%, #c7e4ff 51.92%, #dce2ff 96.44%);
+        border:3px solid white;
+        padding:20px;
+        border-radius:100px;
+        
+    }
+    .navbar {
+        background:rgba(20, 20, 20, 0.699);
+    }
+    .text-decoration-none {
+        color:black;
+        transition: color 0.4s ease;
+    }
+    .text-decoration-none:hover {
+        color:rgb(32, 59, 83);
+    }
+    .epochs {
+        border-radius:100px !important;
+    }
+    .brand {
+        display: inline-block;
+        margin-right:10px;
+        font-weight:bold;
+        font-family: 'Product Sans Black', sans-serif !important;
+        color:white;
+        font-family: Google Sans, sans-serif !important;
+    }
+    .alt {
+        display:inline-block;
+        color:#9AA0A6;
+        font-family: 'Product Sans Black', sans-serif !important;
+    }
+    body  {
+        background-color:black;
+    }
+    .ayır {
+        font-family: 'Product Sans Black', sans-serif !important;
+        color:White;
+        display:inline-block;
+        margin-right:10px;
+        font-weight:200;
+    }
+    .btn-alpha  {
+        background-color:rgb(206, 164, 26);
+        border-radius:10px;
+    }
+    .input-group {
+        background-color:rgb(206, 164, 26);
+        border-radius:10px;
+    }
+    
+    .input-group-append {
+        background-color: rgb(206, 164, 26);
+        border-radius:10px;
+    }
+    .inputs {
+        width:80%;
+        justify-content: space-evenly !important;
+    }
+    .inputb {
+        width:20%;
+
+        
+    }
+    .main {
+        width:70%;
+        border: 2px solid white;
+        border-radius:100px;
+        padding:10px;
+    }
+    .voic {
+        border:2px solid white;
+        border-radius:50px;
+        
+        color:white;
+        font-family: 'Product Sans Black', sans-serif !important;
+        background:black;
+        padding:10px;
+        text-align: center;
+        align-items: center;
+        font-weight: inherit;
+        background: linear-gradient(90deg,#078efb 0,#ac87eb 66.7%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        transition: text 0.5s ease;
+        transition: transform 0.4s ease;
+        box-sizing: border-box;
+        border: 2px solid #078efb;
+        box-shadow: 0 0 15px;
+        
+
+
+    }
+    .voic:hover {
+        transform : scale(1.05);
+        border: 2px solid rgb(30, 99, 179);
+    }
+    .main {
+        color:black;
+    }
+    .text-decoration-none {
+        color:black;
+        margin-left:5px;
+    }
+    .epochs {
+        background: linear-gradient(90deg, #d7e6ff 6.02%, #c7e4ff 51.92%, #dce2ff 96.44%);
+        padding:10px;
+        width:100%;
+        list-style-type: none;
+    }
+    form {
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+    }
+    @media(max-height:800px) {
+        .epochs {
+            margin-left:-9%;
+        }
+    }
+    .text-muted {
+        text-align:right !important;
+        justify-content: right;
+        align-items: right;
+    }
+    .list {
+    position: relative;
+}
+
+.text-muted {
+    position: absolute;
+    right: 20px; 
+    top: 50%;
+    transform: translateY(-50%);
+}
+    
+</style>
+
+
+
+
+
+
+
+
+
+
+</style>
+{% endblock %}

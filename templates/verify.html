@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+{% block gui %}
+
+
+
+
+<br>
+<br>
+<br>
+<br>
+{% from "includes/formhelpers.html" import render_field %}
+<div class="bro">
+  <form method=post>
+    <dl>
+      {{ render_field(form.code,class = "form-control ") }}
+      
+     
+    </dl>
+    <p><input type=submit value=doğrula class="btn btn-primary"></p>
+  </form>
+</div>
+
+<style>
+    body {
+        background-color: #323a42; /* Açık gri arka plan rengi */
+        font-family: Arial, sans-serif; /* Temiz ve okunaklı font */
+    }
+    .form {
+      width:30%;
+    }
+    df {
+      width:30%;
+    }
+
+    input {
+      border: 2px solid white;
+      padding:20px;
+      color:black;
+
+    }
+
+
+</style>
+
+
+{% endblock %}

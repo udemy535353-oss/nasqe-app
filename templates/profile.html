@@ -1,0 +1,488 @@
+{% extends "layout.html" %}
+
+{% block gui %}
+{% if replace %}
+<br>
+<br>
+<br>
+<a href="/chanceprofile">
+<div class="profile">
+   <img src="{{ url_for('static', filename=user.profile) }}" alt="Pro0file Image" class="profile">
+</div>
+</a>
+<h1 class="eleman">{{ user.username }}</h1>
+<img src="{{ url_for('static', filename='verified.svg') }}" alt="Arrow Right" class="ml-2" style="width: 1em; height: 1em;">
+
+
+<br>
+<button class="app" data-toggle="modal" data-target="#followersModal">
+  takipçiler: {{ count }}
+</button>
+
+<!-- Takipçiler Modal -->
+<div class="modal fade" id="followersModal" tabindex="-1" role="dialog" aria-labelledby="followersModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="followersModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        {% if y %}
+        <ul class="list-group">
+          {% for follower in y %}
+          <li class="list-group-item">
+            
+              {{ follower.author }}
+            
+          </li>
+          {% endfor %}
+        </ul>
+        {% else %}
+        <p>Takipçi bulunmamaktadır.</p>
+        {% endif %}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="container mt-4">
+  <br>
+
+  {% if user.date %}
+  <small class="hudisa">Hesabın kurulma tarihi: {{ user.date }}</small><a href="/edit/username/{{user.ıd}}">
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen-fill" viewBox="0 0 16 16">
+    <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001" />
+  </svg>
+</a>
+  {% else %}
+  <small class="hudisa">Hesabın kurulma tarihi: Bilinmiyor</small>
+  {% endif %}
+
+  <br>
+  <br>
+  <div class="equ">
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#followingModal">
+    Takip Edilen: {{ getre }}
+  </button>
+</div>
+<br>
+  <!-- Takip Edilenler Modal -->
+  <div class="modal fade" id="followingModal" tabindex="-1" role="dialog" aria-labelledby="followingModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="followingModalLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          {% if x %}
+          <ul class="list-group">
+            {% for follower in x %}
+            <li class="list-group-item">
+              <a href="/profile/{{ follower.follow_id }}" class="text-decoration-none">
+                {{ follower.follow}}
+              </a>
+            </li>
+            {% endfor %}
+          </ul>
+          {% else %}
+          <p>kimseyi takip etmiyor.</p>
+          {% endif %}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-container">
+    
+    
+    {% if subscribe %}
+    <a class="btn btn-danger" href="/mines/{{ user.ıd }}" role="button">Takipten çık</a>
+    <br>
+    {% else %}
+    <a class="btn btn-secondary" href="/follow/{{ user.ıd }}" role="button">Takip et</a>
+    <br>
+    {% endif %}
+    <hr>
+    <h2>Yazılar</h2>
+    <hr>
+    {% if articles %}
+    <ul class="list-group">
+      {% for article in articles %}
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <a href="/article/{{ article.id }}" class="text-decoration-none fw-bold">
+          {{ article.title }}
+        </a>
+        <a href="/delete/{{article.id}}">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
+            <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
+          </svg>
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <div class="alert alert-danger">Yazı bulunamadı</div>
+    {% endif %}
+  </div>
+</div>
+
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#notificationsModal">
+  Bildirimler
+</button>
+
+
+<div class="modal fade" id="notificationsModal" tabindex="-1" role="dialog" aria-labelledby="notificationsModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="notificationsModalLabel">Bildirimler</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+        {% if compile %}
+        <ul class="list-group list-group-flush">
+          {% for notification in compile %}
+          <li class="list-group-item d-flex align-items-center">
+            
+            <img src="{{ url_for('static', filename=notification.profile) }}" alt="Profil" class="modal-profile-pic mr-3">
+            
+            <span>
+              <strong>{{ notification.sender }} size {{notification.topic}} yaptı</strong> 
+            </span>
+
+          </li>
+          {% endfor %}
+        </ul>
+        {% else %}
+        <p>Yeni bildiriminiz yok.</p>
+        {% endif %}
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<style>
+    .modal-profile-pic {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+</style>
+{% else %}
+<br>
+<br>
+
+<div class="profile">
+  <img src="{{ url_for('static', filename=user.profile) }}" alt="Pro0file Image" class="mt-4 max-w-full h-auto rounded-lg shadow-lg border-4 border-gray-200 mx-auto transition-transform duration-300 hover:scale-105">
+</div>
+
+<h1 class="eleman">{{ user.username }}</h1>
+<input type="radio" id="red" name="color" value="kırmızı">
+<label for="red">Kırmızı</label><br> <br>
+<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#followersModal">
+  takipçiler: {{ count }}
+</button>
+
+<!-- Takipçiler Modal -->
+<div class="modal fade" id="followersModal" tabindex="-1" role="dialog" aria-labelledby="followersModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="followersModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        {% if y %}
+        <ul class="list-group">
+          {% for follower in y %}
+          <li class="list-group-item">
+            
+              {{ follower.author }}
+            
+          </li>
+          {% endfor %}
+        </ul>
+        {% else %}
+        <p>Takipçi bulunmamaktadır.</p>
+        {% endif %}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+<div class="container mt-4">
+  <br>
+  {% if user.date %}
+  <small class="hudisa">Hesabın kurulma tarihi: {{ user.date }}</small>
+  {% else %}
+  <small class="hudisa">Hesabın kurulma tarihi: Bilinmiyor</small>
+  {% endif %}
+  <br>
+  <br>
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#followingModal">
+    Takip Edilen: {{ getre }}
+  </button>
+
+  <!-- Takip Edilenler Modal -->
+  <div class="modal fade" id="followingModal" tabindex="-1" role="dialog" aria-labelledby="followingModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="followingModalLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          {% if x %}
+          <ul class="list-group">
+            {% for follower in x %}
+            <li class="list-group-item">
+              <a href="/profile/{{ follower.follow_id }}" class="text-decoration-none">
+                {{ follower.follow }}
+              </a>
+            </li>
+            {% endfor %}
+          </ul>
+          {% else %}
+          <p>kimseyi takip etmiyor.</p>
+          {% endif %}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-container">
+    <br>
+    
+    {% if subscribe %}
+    <a class="btn btn-danger" href="/mines/{{ user.ıd }}" role="button">Takipten çık</a>
+    <br>
+    {% else %}
+    <a class="btn btn-success" href="/follow/{{ user.ıd }}" role="button">Takip et</a>
+    <br>
+    {% endif %}
+    <hr>
+    <h2>Yazılar</h2>
+    <hr>
+    {% if articles %}
+    <ul class="list-group">
+      {% for article in articles %}
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <a href="/article/{{ article.id }}" class="text-decoration-none fw-bold">
+          {{ article.title }}
+        </a>
+        <a href="/delete/{{article.id}}">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
+            <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
+          </svg>
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <div class="alert alert-danger">Yazı bulunamadı</div>
+    {% endif %}
+  </div>
+</div>
+{% endif %}
+
+<style>
+  
+
+  .btn {
+    color: white;
+    border: none;
+    border-radius: 15px;
+    padding: 2px 3px;
+    
+    
+    font-size: 16px;
+    height: 25px;
+    width: 175px;
+  }
+
+  .eleman {
+    text-align: center;
+    display:inline-block;
+  }
+  .modal-profile-pic {
+        width: 75px;       /* Resim genişliği */
+        height: 75px;      /* Resim yüksekliği */
+        border-radius: 50%;/* Resmi yuvarlak yapar */
+        object-fit: cover; /* Resmin orantısını bozmadan alanı kaplamasını sağlar */
+    }
+
+  .hudisa {
+    color: darkblue;
+    font-weight: bold;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  .btn {
+    margin: auto;
+    display: flex;
+    text-align: center;
+    /* Readability & Reusability: A clear, reusable class for a call-to-action button */
+    display: inline-block;
+    padding: 10px 24px;
+    background-color: #1a73e8; /* A standard, accessible blue */
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+    text-decoration: none; /* Remove underline from the link */
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: center; /* Yatayda ortalama */
+    align-items: center;
+            
+    
+
+    
+  }
+  .ml-2 {
+
+    transform: scale(1.5);
+    display: inline-block;
+    
+  }
+
+  .bi-trash {
+    color: black;
+  }
+
+  .bi-pen {
+    color: black;
+    margin: auto;
+    display: flex;
+    text-align:center;
+    align-items: center;
+    justify-content: center;
+    transform: scale(1.3)
+  }
+
+  .btn-primary.position-relative {
+    margin: auto;
+    display: flex;
+    text-align: center;
+  }
+
+  .btn-danger {
+    margin: auto;
+    display: flex;
+    text-align: center;
+  }
+
+  h1 {
+    color: black;
+  }
+
+  body {
+    background-color: black;
+  }
+
+  img {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    margin-bottom: 20px;
+    width: 100px;
+    height: 100px;
+    border: 2px solid white;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .app {
+    cursor: pointer;
+    text-decoration: none;
+    color: white;
+    background-color: #28a745;
+    border-color: #28a745;
+    background: linear-gradient(rgb(5, 1, 1), rgb(0, 0, 0)) padding-box,
+    linear-gradient(to right, rgb(71, 217, 228), rgb(23, 184, 130)) border-box;
+    border-radius: 50em;
+    border: 3px solid transparent;
+    color: white;
+    font-weight: bold;
+    transition: transform 0.3s ease;
+    position: relative;
+    z-index: 1;
+    width:15%;
+
+  }
+
+  .navbar {
+    background: rgb(138, 27, 27);
+    color: black;
+  }
+
+  body {
+    background-color: white;
+    align-items: center;
+    justify-content: center;
+    text-align:center;
+    display:flex;
+  }
+
+  .bi-pen-fill {
+    color: black;
+    vertical-align: middle;
+  }
+
+  .profile {
+    display: flex;
+    justify-content: center;
+  }
+  .btn .btn-primary {
+    display:inline-block;
+  }
+  
+  
+  
+
+</style>
+{% endblock gui %}
